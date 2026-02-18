@@ -1,0 +1,21 @@
+---
+- name: Configurar servidor web
+  hosts: web
+  become: yes
+  tasks:
+    - name: Actualizar paquetes
+      ansible.builtin.yum:
+        name: "*"
+        state: latest
+
+    - name: Instalar Nginx
+      ansible.builtin.yum:
+        name: nginx
+        state: present
+
+    - name: Habilitar y arrancar Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes
+
