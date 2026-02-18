@@ -19,6 +19,9 @@ jobs:
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
+      - name: Add EC2 host to known_hosts
+        run: ssh-keyscan 108.131.199.227 >> ~/.ssh/known_hosts
+
       - name: Run Ansible Playbook
         run: ansible-playbook -i ansible/hosts.ini ansible/playbook.yml
 
